@@ -11,9 +11,6 @@ func main() {
 
     conn.Write([]byte("hello, server"))
     buffer := make([]byte, 1024)
-    n, _, err := conn.ReadFromUDP(buffer)
-    if err != nil {
-        log.Println(err)
-    }
+    n, _, _ := conn.ReadFromUDP(buffer)
     log.Println("from server:", string(buffer[:n]))
 }
