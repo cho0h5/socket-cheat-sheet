@@ -10,7 +10,10 @@ func main() {
     conn, _ := net.ListenUDP("udp", laddr)
 
     buffer := make([]byte, 1024)
-    n, _ := conn.Read(buffer)
+    n, addr, err := conn.ReadFromUDP(buffer)
+    if err != nil {
+        log.Println(err)
+    }
     log.Println("from client:", string(buffer[:n]))
-    conn.Write([]byte("hello, client"))
+    conn.WriteToUDP([]byte("hello, client"), addr)
 }
