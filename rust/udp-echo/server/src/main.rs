@@ -1,7 +1,7 @@
 use std::net::UdpSocket;
 
 fn main() -> std::io::Result<()> {
-    let socket = UdpSocket::bind("127.0.0.1:8080")?;
+    let socket = UdpSocket::bind("0.0.0.0:8080")?;
 
     let mut buffer = [0; 1024];
 
