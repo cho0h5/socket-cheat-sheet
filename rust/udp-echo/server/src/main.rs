@@ -9,6 +9,4 @@ fn main() -> std::io::Result<()> {
         let (_, src_addr) = socket.recv_from(&mut buffer)?;
         socket.send_to(&buffer, src_addr)?;
     }
-
-    Ok(())
 }
