@@ -1,28 +1,30 @@
 #include <stdio.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <string.h>
+#include <unistd.h>
 
 int main() {
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-	struct sockaddr_in server_addr;
-	memset(&server_addr, 0, sizeof(server_addr));
-	server_addr.sin_family = AF_INET;
-	server_addr.sin_port = htons(8090);
-	server_addr.sin_addr.s_addr = INADDR_ANY;
+	struct sockaddr_in addr;
+	memset(&addr, 0, sizeof(addr));
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(8080);
+	addr.sin_addr.s_addr = INADDR_ANY;
 
-	bind(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr));
+	bind(sockfd, (struct sockaddr*)&addr, sizeof(addr));
 
 	listen(sockfd, 1);
-	printf("0\n");
 
 	int connfd = accept(sockfd, (struct sockaddr*)NULL, NULL);
-	printf("1\n");
 
-	char buf[] = "hello, client";
+	char buffer[1024];
+	read(connfd, buffer, sizeof(buffer));
 
-	write(connfd, buf, 14);
-	printf("send to client: %s\n", buf);
+	printf("from client: %s\n", buffer);
+
+	write(connfd, "hello client", 13);
 
 	close(connfd);
 	close(sockfd);
