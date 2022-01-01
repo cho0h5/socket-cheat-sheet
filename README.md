@@ -1,5 +1,3 @@
-# socket-cheat-sheet
-
 ## Performance
 | rust/tcp-echo | 0.257ms |
 |---------------|---------|
