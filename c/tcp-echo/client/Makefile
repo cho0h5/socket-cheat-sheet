@@ -1,8 +1,7 @@
 run:	main.c
 	mkdir -p build/
-	gcc -o build/server main.c
-	./build/server
-
+	gcc -o build/client main.c
+	./build/client
 
 clean:
 	rm -rf build/
